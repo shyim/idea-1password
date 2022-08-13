@@ -1,13 +1,14 @@
-package com.github.shyim.intellij1password
+package de.shyim.idea1password
 
 import com.intellij.DynamicBundle
+import com.intellij.openapi.util.IconLoader
 import org.jetbrains.annotations.NonNls
 import org.jetbrains.annotations.PropertyKey
 
 @NonNls
-private const val BUNDLE = "messages.MyBundle"
+private const val BUNDLE = "messages.OnePassword"
 
-object MyBundle : DynamicBundle(BUNDLE) {
+object OnePassword : DynamicBundle(BUNDLE) {
 
     @Suppress("SpreadOperator")
     @JvmStatic
@@ -18,4 +19,7 @@ object MyBundle : DynamicBundle(BUNDLE) {
     @JvmStatic
     fun messagePointer(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) =
         getLazyMessage(key, *params)
+
+    @JvmField
+    val ICON = IconLoader.getIcon("/META-INF/pluginIcon.svg")
 }

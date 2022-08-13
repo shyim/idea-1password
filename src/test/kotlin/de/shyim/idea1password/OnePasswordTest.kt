@@ -1,4 +1,4 @@
-package com.github.shyim.intellij1password
+package de.shyim.idea1password
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.psi.xml.XmlFile
@@ -7,7 +7,7 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.PsiErrorElementUtil
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
-class MyPluginTest : BasePlatformTestCase() {
+class OnePasswordTest : BasePlatformTestCase() {
 
     fun testXMLFile() {
         val psiFile = myFixture.configureByText(XmlFileType.INSTANCE, "<foo>bar</foo>")

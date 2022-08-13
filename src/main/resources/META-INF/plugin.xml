@@ -1,18 +1,16 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.shyim.intellij1password</id>
-    <name>intellij-1password</name>
+    <id>de.shyim.idea1password</id>
+    <name>1Password</name>
     <vendor>shyim</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.shyim.intellij1password.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.shyim.intellij1password.services.MyProjectService"/>
-    </extensions>
+    <actions>
+        <action class="de.shyim.idea1password.action.PreviewFileAction">
+            <add-to-group group-id="EditorPopupMenu"/>
+        </action>
+    </actions>
 
-    <applicationListeners>
-        <listener class="com.github.shyim.intellij1password.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
 </idea-plugin>
