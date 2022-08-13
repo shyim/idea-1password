@@ -14,7 +14,7 @@ object OPManager {
         val commandLine = GeneralCommandLine("op", "inject")
         commandLine.withInput(File(srcFile.path))
 
-        val handler = CapturingProcessHandler(commandLine).runProcess()
+        val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
         if (handler.exitCode != 0) {
             throw CommandExecutionFailed(handler.stderr)
@@ -26,7 +26,7 @@ object OPManager {
     fun listItemsInVault(): List<VaultListItem> {
         val commandLine = GeneralCommandLine("op", "item", "list", "--format", "json")
 
-        val handler = CapturingProcessHandler(commandLine).runProcess()
+        val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
         if (handler.exitCode != 0) {
             throw CommandExecutionFailed(handler.stderr)
@@ -48,7 +48,7 @@ object OPManager {
     fun getItem(id: String): VaultItem {
         val commandLine = GeneralCommandLine("op", "item", "get", id, "--format", "json")
 
-        val handler = CapturingProcessHandler(commandLine).runProcess()
+        val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
         if (handler.exitCode != 0) {
             throw CommandExecutionFailed(handler.stderr)
@@ -67,6 +67,31 @@ object OPManager {
 
         return VaultItem(json.getString("id"), json.getString("title"), fields)
     }
+
+    fun generatePassword(title: String): String {
+        val commandLine = GeneralCommandLine("op", "item", "create", "--category", "login", "--generate-password", "--title", title,  "--format", "json")
+
+        val handler = CapturingProcessHandler(commandLine).runProcess(30000)
+
+        if (handler.exitCode != 0) {
+            throw CommandExecutionFailed(handler.stderr)
+        }
+
+        val json = JSONObject(handler.stdout)
+
+        val jsonFields = json.getJSONArray("fields")
+
+        for (i in 0 until jsonFields.length()) {
+            val fieldItem = jsonFields.getJSONObject(i)
+
+            if (fieldItem.getString("id") == "password") {
+                return fieldItem.getString("reference")
+            }
+        }
+
+        throw InvalidJSONResponseFromOP("Could not find reference in op command")
+    }
 }
 
 class CommandExecutionFailed(message: String): Exception(message)
+class InvalidJSONResponseFromOP(message: String): Exception(message)

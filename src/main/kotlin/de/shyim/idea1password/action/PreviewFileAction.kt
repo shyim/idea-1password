@@ -37,7 +37,9 @@ class PreviewFileAction: DumbAwareAction(OnePassword.message("previewAction"), "
                         FileEditorManager.getInstance(project).openTextEditor(OpenFileDescriptor(project, file), true)
                     }
                 } catch (e: CommandExecutionFailed) {
-                    HintManager.getInstance().showErrorHint(srcEditor, "Generating preview failed: ${e.message}")
+                    ApplicationManager.getApplication().invokeLater {
+                        HintManager.getInstance().showErrorHint(srcEditor, "Generating preview failed: ${e.message}")
+                    }
                 }
             }
         }

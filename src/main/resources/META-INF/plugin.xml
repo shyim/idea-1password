@@ -13,8 +13,9 @@
         <action class="de.shyim.idea1password.action.GetFromOnePasswordAction">
             <add-to-group group-id="GenerateGroup"/>
         </action>
-    </actions>
 
-    <extensions defaultExtensionNs="com.intellij">
-    </extensions>
+        <action class="de.shyim.idea1password.action.GeneratePasswordAction">
+            <add-to-group group-id="GenerateGroup"/>
+        </action>
+    </actions>
 </idea-plugin>
