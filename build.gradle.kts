@@ -15,6 +15,10 @@ plugins {
     id("org.jetbrains.qodana") version "0.1.13"
 }
 
+dependencies {
+    implementation("org.codehaus.jettison:jettison:1.5.0")
+}
+
 group = properties("pluginGroup")
 version = properties("pluginVersion")
 
