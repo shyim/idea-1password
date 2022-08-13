@@ -52,4 +52,15 @@ class PreviewFileAction: DumbAwareAction(OnePassword.message("previewAction"), "
             BackgroundableProcessIndicator(task)
         )
     }
+
+    override fun update(e: AnActionEvent) {
+        val srcEditor = e.getData(LangDataKeys.EDITOR)
+
+        if (srcEditor == null) {
+            e.presentation.isEnabledAndVisible = false
+            return
+        }
+
+        e.presentation.isEnabledAndVisible = srcEditor.document.text.contains("op://")
+    }
 }
