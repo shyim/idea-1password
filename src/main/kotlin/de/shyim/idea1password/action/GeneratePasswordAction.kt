@@ -31,7 +31,7 @@ class GeneratePasswordAction: DumbAwareAction("Generate A Password", "", OnePass
         val task = object : Task.Backgroundable(project, "Creating new Entry") {
             override fun run(indicator: ProgressIndicator) {
                 try {
-                    val reference = OPManager.generatePassword(panel.vaultTitle)
+                    val reference = OPManager.generatePassword(project, panel.vaultTitle)
 
                     ApplicationManager.getApplication().invokeLater {
                         ApplicationManager.getApplication().runWriteAction {

@@ -32,7 +32,7 @@ class GetFromOnePasswordAction: DumbAwareAction("Get from 1Password", "", OnePas
         val task = object: Task.Backgroundable(project, "Listing all items") {
             override fun run(indicator: ProgressIndicator) {
                 try {
-                    val items = OPManager.listItemsInVault()
+                    val items = OPManager.listItemsInVault(project)
                     val popupList = JBList(items)
 
                     popupList.cellRenderer = object : JBList.StripedListCellRenderer() {
@@ -87,7 +87,7 @@ class GetFromOnePasswordAction: DumbAwareAction("Get from 1Password", "", OnePas
         val task = object: Task.Backgroundable(project, "Getting field information") {
             override fun run(indicator: ProgressIndicator) {
                 try {
-                    val items = OPManager.getItem(vaultListItem.id).fields
+                    val items = OPManager.getItem(project, vaultListItem.id).fields
                     val popupList = JBList(items)
 
                     popupList.cellRenderer = object : JBList.StripedListCellRenderer() {

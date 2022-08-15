@@ -2,6 +2,7 @@ package de.shyim.idea1password
 
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.CapturingProcessHandler
+import com.intellij.openapi.project.Project
 import de.shyim.idea1password.dict.VaultItem
 import de.shyim.idea1password.dict.VaultItemField
 import de.shyim.idea1password.dict.VaultListItem
@@ -10,9 +11,10 @@ import org.codehaus.jettison.json.JSONObject
 import java.io.File
 
 object OPManager {
-    fun preview(srcFile: File): String {
+    fun preview(project: Project, srcFile: File): String {
         val commandLine = GeneralCommandLine("op", "inject")
         commandLine.withInput(File(srcFile.path))
+        appendConfig(project, commandLine, false)
 
         val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
@@ -23,8 +25,9 @@ object OPManager {
         return handler.stdout
     }
 
-    fun listItemsInVault(): List<VaultListItem> {
+    fun listItemsInVault(project: Project): List<VaultListItem> {
         val commandLine = GeneralCommandLine("op", "item", "list", "--format", "json")
+        appendConfig(project, commandLine)
 
         val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
@@ -45,8 +48,9 @@ object OPManager {
         return list
     }
 
-    fun getItem(id: String): VaultItem {
+    fun getItem(project: Project, id: String): VaultItem {
         val commandLine = GeneralCommandLine("op", "item", "get", id, "--format", "json")
+        appendConfig(project, commandLine)
 
         val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
@@ -68,17 +72,18 @@ object OPManager {
         return VaultItem(json.getString("id"), json.getString("title"), fields)
     }
 
-    fun generatePassword(title: String): String {
+    fun generatePassword(project: Project, title: String): String {
         val payload = JSONObject()
         payload.put("title", title)
         payload.put("category", "LOGIN")
-        payload.put("generatePassword", false)
+        payload.put("generatePassword", OnePasswordSettings.getInstance(project).getUsePasswordRecipe())
 
         val file = File.createTempFile("temp", null)
         file.writeText(payload.toString())
 
         val commandLine = GeneralCommandLine("op", "item", "create", "--format", "json")
         commandLine.withInput(file)
+        appendConfig(project, commandLine)
 
         val handler = CapturingProcessHandler(commandLine).runProcess(30000)
         file.delete()
@@ -100,6 +105,19 @@ object OPManager {
         }
 
         throw InvalidJSONResponseFromOP("Could not find reference in op command")
+    }
+
+    private fun appendConfig(project: Project, cmd: GeneralCommandLine, addVault: Boolean = true) {
+        val settings = OnePasswordSettings.getInstance(project)
+
+        if (settings.getAccount().isNotEmpty()) {
+            cmd.withEnvironment("OP_ACCOUNT", settings.getAccount())
+        }
+
+        if (addVault && settings.getVault().isNotEmpty()) {
+            cmd.addParameter("--vault")
+            cmd.addParameter(settings.getVault())
+        }
     }
 }
 

@@ -29,7 +29,7 @@ class PreviewFileAction: DumbAwareAction(OnePassword.message("previewAction"), "
         val task = object: Backgroundable(project, "Preview secrets") {
             override fun run(indicator: ProgressIndicator) {
                 try {
-                    val preview = OPManager.preview(File(srcFile.path))
+                    val preview = OPManager.preview(project, File(srcFile.path))
 
                     val file = LightVirtualFile("Preview: ${srcFile.name}", srcFile.fileType, preview)
 
