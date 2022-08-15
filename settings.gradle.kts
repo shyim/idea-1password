@@ -1,1 +1,1 @@
-rootProject.name = "intellij-1password"
+rootProject.name = "idea-1password"
