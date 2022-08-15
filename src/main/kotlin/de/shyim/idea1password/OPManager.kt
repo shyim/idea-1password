@@ -69,9 +69,19 @@ object OPManager {
     }
 
     fun generatePassword(title: String): String {
-        val commandLine = GeneralCommandLine("op", "item", "create", "--category", "login", "--generate-password", "--title", title,  "--format", "json")
+        val payload = JSONObject()
+        payload.put("title", title)
+        payload.put("category", "LOGIN")
+        payload.put("generatePassword", false)
+
+        val file = File.createTempFile("temp", null)
+        file.writeText(payload.toString())
+
+        val commandLine = GeneralCommandLine("op", "item", "create", "--format", "json")
+        commandLine.withInput(file)
 
         val handler = CapturingProcessHandler(commandLine).runProcess(30000)
+        file.delete()
 
         if (handler.exitCode != 0) {
             throw CommandExecutionFailed(handler.stderr)

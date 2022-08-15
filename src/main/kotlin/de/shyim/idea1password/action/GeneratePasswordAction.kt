@@ -33,10 +33,12 @@ class GeneratePasswordAction: DumbAwareAction("Generate A Password", "", OnePass
                 try {
                     val reference = OPManager.generatePassword(panel.vaultTitle)
 
-                    ApplicationManager.getApplication().runWriteAction {
-                        CommandProcessor.getInstance().executeCommand(project, {
-                            editor.document.insertString(editor.caretModel.offset, reference)
-                        }, "Insert Field", null)
+                    ApplicationManager.getApplication().invokeLater {
+                        ApplicationManager.getApplication().runWriteAction {
+                            CommandProcessor.getInstance().executeCommand(project, {
+                                editor.document.insertString(editor.caretModel.offset, reference)
+                            }, "Insert Field", null)
+                        }
                     }
                 } catch (e: CommandExecutionFailed) {
                     ApplicationManager.getApplication().invokeLater {
