@@ -1,8 +1,10 @@
 # 1Password Integration for IDEA
 
 ![Build](https://github.com/shyim/intellij-1password/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/19698.svg)](https://plugins.jetbrains.com/plugin/19698)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/19698.svg)](https://plugins.jetbrains.com/plugin/19698)
+
+<!-- Plugin description -->
 
 1Password for IDEA provides you with a set of tools to integrate your development workflow with 1Password, powered by the [1Password CLI](https://developer.1password.com/docs/cli/).
 
@@ -16,3 +18,5 @@
 - Preview your Secrets: You can right-click any file or editor to see the preview of your secrets
 - Generate new Passwords: You can generate using the Generate menu new secrets and insert the reference to it
 - Choose a Secret from your Vault: You can search in your Vault and insert the reference to the item
+- 
+<!-- Plugin description end -->
