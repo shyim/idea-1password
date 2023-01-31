@@ -11,7 +11,7 @@
 ## Quick Start
 1. **Set up the CLI** - v2.4.0 or greater of the 1Password CLI needs to be [installed on your system](https://developer.1password.com/docs/cli/get-started#install).
 2. **Enable biometric unlock** - You must have [biometric unlock](https://developer.1password.com/docs/cli/about-biometric-unlock) enabled. If you don't have a biometric device, you'll still be able to use your device user password.
-3. **Install this extension** - You can download this extension from the Jetbrains Marketplace
+3. **Install this plugin** - You can download [this plugin](https://plugins.jetbrains.com/plugin/19698-1password) from the Jetbrains Marketplace
 
 ## Features
 
