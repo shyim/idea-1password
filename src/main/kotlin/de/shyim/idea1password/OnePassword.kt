@@ -21,5 +21,5 @@ object OnePassword : DynamicBundle(BUNDLE) {
         getLazyMessage(key, *params)
 
     @JvmField
-    val ICON = IconLoader.getIcon("/META-INF/pluginIcon.svg")
+    val ICON = IconLoader.getIcon("/META-INF/pluginIcon.svg", javaClass)
 }
