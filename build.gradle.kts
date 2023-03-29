@@ -16,7 +16,7 @@ plugins {
 }
 
 dependencies {
-    implementation("org.codehaus.jettison:jettison:1.5.0")
+    implementation("org.codehaus.jettison:jettison:1.5.2")
 }
 
 group = properties("pluginGroup")
