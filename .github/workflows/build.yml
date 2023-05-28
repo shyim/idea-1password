@@ -41,6 +41,12 @@ jobs:
           sudo rsync -a --delete /tmp/empty_dir/ /usr/local/lib/android
           sudo rsync -a --delete /tmp/empty_dir/ /opt/ghc
           rmdir /tmp/empty_dir
+          
+      - name: TEst
+        run: |
+          ls -la /usr/share/dotnet
+          ls -la /usr/local/lib/android
+          ls -la /opt/ghc
 
       # Check out current repository
       - name: Fetch Sources
