@@ -3,5 +3,7 @@
 # intellij-1password Changelog
 
 ## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+
+## [0.0.6]
+OPManager: fix preview by @izotomas in https://github.com/shyim/idea-1password/pull/9
+
