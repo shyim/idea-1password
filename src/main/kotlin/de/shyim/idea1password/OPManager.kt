@@ -12,7 +12,7 @@ import java.io.File
 
 object OPManager {
     fun preview(project: Project, srcFile: File): String {
-        val commandLine = GeneralCommandLine("op", "inject")
+        val commandLine = GeneralCommandLine("op", "inject", "--in-file")
         commandLine.withInput(File(srcFile.path))
         appendConfig(project, commandLine, false)
 
