@@ -18,5 +18,5 @@
 - Preview your Secrets: You can right-click any file or editor to see the preview of your secrets
 - Generate new Passwords: You can generate using the Generate menu new secrets and insert the reference to it
 - Choose a Secret from your Vault: You can search in your Vault and insert the reference to the item
-- 
+- Pass secrets as command line arguments into Run Configurations with macros.
 <!-- Plugin description end -->

@@ -42,7 +42,13 @@ object OPManager {
         for (i in 0 until json.length()) {
             val item = json.getJSONObject(i)
 
-            list.add(VaultListItem(item.getString("id"), item.getString("title"), item.getJSONObject("vault").getString("name")))
+            list.add(
+                VaultListItem(
+                    item.getString("id"),
+                    item.getString("title"),
+                    item.getJSONObject("vault").getString("name")
+                )
+            )
         }
 
         return list
@@ -51,7 +57,6 @@ object OPManager {
     fun getItem(project: Project, id: String): VaultItem {
         val commandLine = GeneralCommandLine("op", "item", "get", id, "--format", "json")
         appendConfig(project, commandLine)
-
         val handler = CapturingProcessHandler(commandLine).runProcess(30000)
 
         if (handler.exitCode != 0) {
@@ -107,6 +112,19 @@ object OPManager {
         throw InvalidJSONResponseFromOP("Could not find reference in op command")
     }
 
+    fun readPath(project: Project?, reference: String): String {
+        val commandLine = GeneralCommandLine("op", "read", "-n", reference)
+        val handler = CapturingProcessHandler(commandLine).runProcess(30000)
+        if (project != null) {
+            appendConfig(project, commandLine, false)
+        }
+
+        if (handler.exitCode != 0) {
+            throw CommandExecutionFailed(handler.stderr)
+        }
+        return handler.stdout
+    }
+
     private fun appendConfig(project: Project, cmd: GeneralCommandLine, addVault: Boolean = true) {
         val settings = OnePasswordSettings.getInstance(project)
 
@@ -121,5 +139,5 @@ object OPManager {
     }
 }
 
-class CommandExecutionFailed(message: String): Exception(message)
-class InvalidJSONResponseFromOP(message: String): Exception(message)
+class CommandExecutionFailed(message: String) : Exception(message)
+class InvalidJSONResponseFromOP(message: String) : Exception(message)

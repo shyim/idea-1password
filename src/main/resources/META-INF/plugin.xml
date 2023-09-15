@@ -25,5 +25,7 @@
                 provider="de.shyim.idea1password.OnePasswordConfigurableProvider"/>
 
         <projectService serviceImplementation="de.shyim.idea1password.OnePasswordSettings"/>
+        <macro implementation="de.shyim.idea1password.OnePasswordMacro"/>
     </extensions>
+
 </idea-plugin>
