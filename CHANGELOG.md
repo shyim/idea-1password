@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 
-## [0.0.6]
-OPManager: fix preview by @izotomas in https://github.com/shyim/idea-1password/pull/9
+## [0.0.7]
+add $1Password$ run config macro by @chadselph in https://github.com/shyim/idea-1password/pull/11
 
+## [0.0.6]
