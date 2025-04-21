@@ -59,8 +59,8 @@ class GetFromOnePasswordAction: DumbAwareAction("Get from 1Password", "", OnePas
                             return@setFilteringEnabled (it as VaultListItem).title
                         }
 
-                    builder.setItemChoosenCallback {
-                        val vaultListItem = (builder.chooserComponent as JBList<VaultListItem>).selectedValue ?: return@setItemChoosenCallback
+                    builder.setItemChosenCallback {
+                        val vaultListItem = (builder.chooserComponent as JBList<VaultListItem>).selectedValue ?: return@setItemChosenCallback
 
                         showVaultItemFields(vaultListItem, project, srcEditor)
                     }
@@ -114,8 +114,8 @@ class GetFromOnePasswordAction: DumbAwareAction("Get from 1Password", "", OnePas
                             return@setFilteringEnabled (it as VaultItemField).label
                         }
 
-                    builder.setItemChoosenCallback {
-                        val field = (builder.chooserComponent as JBList<VaultItemField>).selectedValue ?: return@setItemChoosenCallback
+                    builder.setItemChosenCallback {
+                        val field = (builder.chooserComponent as JBList<VaultItemField>).selectedValue ?: return@setItemChosenCallback
 
                         ApplicationManager.getApplication().runWriteAction {
                             CommandProcessor.getInstance().executeCommand(project, {
