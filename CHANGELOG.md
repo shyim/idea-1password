@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+## [0.0.10]
+- Fixed deprecations in newer versions
+
 ## [0.0.9]
 - Marked compatible to 2024.1 IDE version
 
